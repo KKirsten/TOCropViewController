@@ -28,6 +28,7 @@
 #import "TOCroppedImageAttributes.h"
 
 static const CGFloat kTOCropViewControllerTitleTopPadding = 14.0f;
+static const CGFloat kTOCropViewControllerTitleHorizontalPadding = 10.0f;
 static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 
 @interface TOCropViewController () <UIActionSheetDelegate, UIViewControllerTransitioningDelegate, TOCropViewDelegate>
@@ -385,7 +386,8 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
 
     // Work out the size of the title label based on the crop view size
     CGRect frame = self.titleLabel.frame;
-    frame.size = [self.titleLabel sizeThatFits:self.cropView.frame.size];
+    CGSize maxSize = CGRectInset(self.cropView.frame, kTOCropViewControllerTitleHorizontalPadding, 0).size;
+    frame.size = [self.titleLabel sizeThatFits:maxSize];
     self.titleLabel.frame = frame;
 
     // Set out the appropriate inset for that
